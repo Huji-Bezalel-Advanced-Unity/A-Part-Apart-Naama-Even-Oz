@@ -7,7 +7,7 @@ namespace _APA.Scripts
     using System.Collections.Generic; 
 
     [RequireComponent(typeof(Collider2D))]
-    public class Door : APAMonoBehaviour
+    public class APADoor : APAMonoBehaviour
     {
         [SerializeField] private AudioClip doorSound;
 
@@ -71,18 +71,17 @@ namespace _APA.Scripts
             if (doorCollider == null) doorCollider = GetComponent<Collider2D>();
             if (doorRenderer == null) doorRenderer = GetComponent<SpriteRenderer>();
             if (doorRenderer == null && !instantMove)
-                Debug.LogWarning($"Door '{gameObject.name}' has no SpriteRenderer but is not set to instantMove.",
-                    this);
+                APADebug.LogWarning($"Door '{gameObject.name}' has no SpriteRenderer but is not set to instantMove.");
             if (doorCollider == null)
             {
-                Debug.LogError($"Door '{gameObject.name}' needs a Collider2D!", this);
+                APADebug.LogError($"Door '{gameObject.name}' needs a Collider2D!");
                 enabled = false;
                 return;
             }
 
             if (string.IsNullOrEmpty(doorID))
             {
-                Debug.LogError($"Door '{gameObject.name}' needs a Door ID!", this);
+                APADebug.LogError($"Door '{gameObject.name}' needs a Door ID!");
                 enabled = false;
                 return;
             }
@@ -118,8 +117,6 @@ namespace _APA.Scripts
         {
             if (!isPermanentlyOpen || !stayOpenPermanently)
             {
-                // EventManager.OnObjectActivate += HandleActivation;
-                // EventManager.OnObjectDeactivate += HandleDeactivation;
                 Manager.EventManager.AddListener(APAEventName.OnObjectActivate,HandleActivation);
                 Manager.EventManager.AddListener(APAEventName.OnObjectDeactivate,HandleDeactivation);
             }
@@ -183,7 +180,7 @@ namespace _APA.Scripts
         {
             if (isOpen && logAction && !isPermanentlyOpen) return;
             if (logAction && !(stayOpenPermanently && isPermanentlyOpen))
-                Debug.Log($"Door '{gameObject.name}' Opening. Requirement met.");
+                APADebug.Log($"Door '{gameObject.name}' Opening. Requirement met.");
 
             isOpen = true;
             StopRunningCoroutine();
@@ -192,7 +189,7 @@ namespace _APA.Scripts
             if (stayOpenPermanently && !isPermanentlyOpen)
             {
                 isPermanentlyOpen = true;
-                Debug.Log($"Door '{gameObject.name}' is now permanently open.");
+                APADebug.Log($"Door '{gameObject.name}' is now permanently open.");
                 Manager.EventManager.AddListener(APAEventName.OnObjectActivate, HandleActivation);
                 Manager.EventManager.AddListener(APAEventName.OnObjectDeactivate, HandleDeactivation);
             }
@@ -203,7 +200,7 @@ namespace _APA.Scripts
             if (stayOpenPermanently && isPermanentlyOpen) return;
             if (!isOpen && logAction) return;
 
-            if (logAction) Debug.Log($"Door '{gameObject.name}' Closing. Requirement lost or timed out.");
+            if (logAction) APADebug.Log($"Door '{gameObject.name}' Closing. Requirement lost or timed out.");
             isOpen = false;
             StopRunningCoroutine();
             UpdateVisualAndPhysicsState();
@@ -215,9 +212,9 @@ namespace _APA.Scripts
             if (doorRenderer != null) doorRenderer.color = isOpen ? openColor : closedColor;
 
             if (doorSound != null)
-                SoundManager.Instance?.PlaySFX(doorSound);
+                APASoundManager.Instance?.PlaySFX(doorSound);
             else
-                SoundManager.Instance?.PlayDoorMoveSound();
+                APASoundManager.Instance?.PlayDoorMoveSound();
 
             if (activeMoveCoroutine != null)
             {

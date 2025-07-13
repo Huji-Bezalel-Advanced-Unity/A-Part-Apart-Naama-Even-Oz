@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace _APA.Scripts
 {
-    public class APAGameLoaderComponent : MonoBehaviour
+    public class APAGameLoaderComponent : APAMonoBehaviour
     {
         private void Start()
         {

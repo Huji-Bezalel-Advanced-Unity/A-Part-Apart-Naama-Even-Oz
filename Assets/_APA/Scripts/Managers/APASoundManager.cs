@@ -3,9 +3,9 @@ using System.Collections;
 
 namespace _APA.Scripts
 {
-    public class SoundManager : APAMonoBehaviour
+    public class APASoundManager : APAMonoBehaviour
     {
-        public static SoundManager Instance { get; private set; }
+        public static APASoundManager Instance { get; private set; }
 
         [Header("Audio Sources")]
         [SerializeField]
@@ -68,7 +68,6 @@ namespace _APA.Scripts
         public void PlayPressurePlateSound() => PlaySFX(pressurePlateClickClip);
         public void PlayClickSound() => PlayPressurePlateSound();
 
-        // ---------- Voice ----------
         public void PlayVoiceLine(AudioClip clip, float delay = 0f)
         {
             if (voiceSource == null || clip == null) return;
@@ -107,7 +106,7 @@ namespace _APA.Scripts
 
             var audioSource = _lastPlayVoice.AddComponent<AudioSource>();
             audioSource.clip = clip;
-            audioSource.volume = 0.1f;
+            audioSource.volume = 0.7f;
             audioSource.Play();
 
             Destroy(_lastPlayVoice, clip.length + 0.1f);

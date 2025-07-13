@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e3dbbbaa40c0d04db8e6ff695b73f16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  darkPlayerMovement: {fileID: 811445754788905259}
+  apaDarkApaPlayerMovement: {fileID: 811445754788905259}
   lightCheckPoints: []
   lightBlockerLayer:
     serializedVersion: 2
@@ -247,11 +247,12 @@ MonoBehaviour:
   jumpKey: 119
   acceleration: 50
   maxSpeed: 15
-  jumpForce: 30
+  jumpForce: 20
   groundCheck: {fileID: 1149428478163249040}
   groundCheckRadius: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  playerId: Dark
   lightPushForce: 50
   pushDuration: 0.5

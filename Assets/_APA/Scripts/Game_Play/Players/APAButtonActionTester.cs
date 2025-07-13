@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ButtonActionTester : MonoBehaviour
+public class APAButtonActionTester : MonoBehaviour
 {
     [Header("Test Settings")]
     [SerializeField] private string messageToPrint = "Button Test Action Executed!";

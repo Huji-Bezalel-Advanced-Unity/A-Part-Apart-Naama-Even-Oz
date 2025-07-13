@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _APA.Scripts
 {
-    public class DarkPlayerMovement : PlayerMovement
+    public class ApaDarkApaPlayerMovement : APAPlayerMovement
     {
         [Header("Settings - push")]
         [SerializeField]

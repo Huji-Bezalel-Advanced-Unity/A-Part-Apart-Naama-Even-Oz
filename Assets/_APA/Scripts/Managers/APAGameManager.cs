@@ -8,9 +8,9 @@ using APA.Core;
 
 namespace _APA.Scripts
 {
-    public class GameManager : APAMonoBehaviour
+    public class APAGameManager : APAMonoBehaviour
     {
-        public static GameManager Instance { get; private set; }
+        public static APAGameManager Instance { get; private set; }
 
         [Header("Scene Names")]
         [SerializeField] private string mainMenuSceneName = "MainMenu";
@@ -78,7 +78,7 @@ namespace _APA.Scripts
             StopCurrentVideos();
 
             currentMenuBackgroundVideoInstance = Instantiate(videoPlayerPrefab);
-            var controller = currentMenuBackgroundVideoInstance.GetComponent<VideoPlaybackController>();
+            var controller = currentMenuBackgroundVideoInstance.GetComponent<APAVideoPlaybackController>();
             var audio = currentMenuBackgroundVideoInstance.GetComponent<AudioSource>();
 
             controller.Play(
@@ -108,7 +108,7 @@ namespace _APA.Scripts
 
             StopCurrentVideos();
             currentEventVideoInstance = Instantiate(videoPlayerPrefab);
-            var controller = currentEventVideoInstance.GetComponent<VideoPlaybackController>();
+            var controller = currentEventVideoInstance.GetComponent<APAVideoPlaybackController>();
             var audio = currentEventVideoInstance.GetComponent<AudioSource>();
 
             controller.Play(
@@ -135,7 +135,7 @@ namespace _APA.Scripts
         private void StopAndDestroy(ref GameObject instance)
         {
             if (instance == null) return;
-            var controller = instance.GetComponent<VideoPlaybackController>();
+            var controller = instance.GetComponent<APAVideoPlaybackController>();
             controller?.ForceStop();
             Destroy(instance);
             instance = null;
@@ -159,7 +159,7 @@ namespace _APA.Scripts
         {
             if (scene.name != gameWorldSceneName) return;
 
-            Debug.Log("[GameManager] GameWorld loaded. Attempting to spawn players...");
+            APADebug.Log("[GameManager] GameWorld loaded. Attempting to spawn players...");
 
             player1Instance = Instantiate(player1Prefab, spawnPosition1, Quaternion.identity);
             player2Instance = Instantiate(player2Prefab, spawnPosition2, Quaternion.identity);
@@ -168,7 +168,7 @@ namespace _APA.Scripts
             DontDestroyOnLoad(player2Instance);
 
             APADebug.Log("[GameManager] Players spawned successfully.");
-            var cameraPrefab = Resources.Load<MainCameraHolder>("Camera");
+            var cameraPrefab = Resources.Load<APAMainCameraHolder>("Camera");
             if (cameraPrefab == null)
             {
                 APADebug.LogWarning("cameraPrefab not loaded.");
@@ -176,17 +176,10 @@ namespace _APA.Scripts
             }
 
             var cameraInstantiated = Instantiate(cameraPrefab);
-            cameraInstantiated.MainCameraController.SetPlayers(player1Instance.transform, player2Instance.transform);
+            cameraInstantiated.apaMainCameraController.SetPlayers(player1Instance.transform, player2Instance.transform);
 
             APADebug.Log("Players spawned successfully.");
-
-            // var barriers = FindObjectsOfType<ProgressiveBarrier>();
-            // foreach (var barrier in barriers)
-            // {
-            //     barrier.SetPlayers(player1Instance.transform, player2Instance.transform);
-            // }
-
-            Debug.Log("Players spawned successfully and assigned to barriers and camera.");
+            APADebug.Log("Players spawned successfully and assigned to barriers and camera.");
             Manager.PlayerRegistry.SetPlayers(player1Instance.transform, player2Instance.transform);
 
         }
@@ -195,17 +188,17 @@ namespace _APA.Scripts
         {
             if (clip == null)
             {
-                Debug.LogWarning("Missing VideoClip.");
+                APADebug.LogWarning("Missing VideoClip.");
                 return false;
             }
             if (prefab == null)
             {
-                Debug.LogError("Missing VideoPlayerPrefab.");
+                APADebug.LogError("Missing VideoPlayerPrefab.");
                 return false;
             }
             if (texture == null && clip == mainMenuBackgroundVideo)
             {
-                Debug.LogWarning("Main menu render texture is missing.");
+                APADebug.LogWarning("Main menu render texture is missing.");
                 return false;
             }
             return true;

@@ -11,11 +11,11 @@ namespace _APA.Scripts.Managers
         [SerializeField] private Transform respawnPoint;
         [SerializeField] private float detectionMargin = 0.1f;
 
-        private LightInteractionController movementScript;
+        private APALightInteractionController movementScript;
 
         private void Awake()
         {
-            movementScript = GetComponent<LightInteractionController>();
+            movementScript = GetComponent<APALightInteractionController>();
             if (movementScript == null)
             {
                 Debug.LogWarning("DarkPlayerController script not found on the player.");

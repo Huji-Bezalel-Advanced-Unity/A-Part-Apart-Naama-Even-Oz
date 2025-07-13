@@ -6,7 +6,7 @@ namespace _APA.Scripts
     using UnityEngine.Events;
 
     [RequireComponent(typeof(Collider2D))]
-    public class CollectablePoint : APAMonoBehaviour
+    public class APACollectablePoint : APAMonoBehaviour
     {
         public enum CollectableType { Light, Dark }
 
@@ -29,7 +29,7 @@ namespace _APA.Scripts
             Collider2D col = GetComponent<Collider2D>();
             if (col != null && !col.isTrigger)
             {
-                Debug.LogWarning($"CollectablePoint on '{gameObject.name}' requires Collider2D to be trigger.", this);
+                APADebug.LogWarning($"CollectablePoint on '{gameObject.name}' requires Collider2D to be trigger.");
                 col.isTrigger = true;
             }
         }
@@ -49,7 +49,7 @@ namespace _APA.Scripts
             }
             else
             {
-                Debug.Log($"CollectablePoint: '{gameObject.name}' ignored collision with '{other.gameObject.name}' (Layer: {otherLayerName}) – required: {requiredPlayerType}.");
+                APADebug.Log($"CollectablePoint: '{gameObject.name}' ignored collision with '{other.gameObject.name}' (Layer: {otherLayerName}) – required: {requiredPlayerType}.");
             }
         }
 
@@ -59,7 +59,7 @@ namespace _APA.Scripts
 
             if (!string.IsNullOrEmpty(targetObjectID))
             {
-                Debug.Log($"Invoked collecting '{targetObjectID}' on '{gameObject.name}'.");
+                APADebug.Log($"Invoked collecting '{targetObjectID}' on '{gameObject.name}'.");
                     Manager.EventManager.InvokeEvent(
                         APAEventName.OnObjectActivate,
                         new Tuple<string, GameObject>(targetObjectID, this.gameObject)

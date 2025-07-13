@@ -4,7 +4,7 @@ namespace _APA.Scripts
     using UnityEngine.Events;
 
     [RequireComponent(typeof(Collider2D))]
-    public class ButtonInteractable : APAMonoBehaviour, IInteractable
+    public class APAButtonInteractable : APAMonoBehaviour, IInteractable
     {
         [Header("Event Manager Settings")]
         [Tooltip("The unique ID of the object(s) this button should activate/deactivate via EventManager.")]

@@ -4,7 +4,7 @@ namespace _APA.Scripts
     using System.Collections;
 
     [RequireComponent(typeof(Collider2D))]
-    public class DisappearingPlatform : APAMonoBehaviour
+    public class APADisappearingPlatform : APAMonoBehaviour
     {
         public enum ActivationMode
         {
@@ -51,18 +51,17 @@ namespace _APA.Scripts
             if (platformRenderer == null) platformRenderer = GetComponent<SpriteRenderer>();
             if (platformAnimator == null) platformAnimator = GetComponent<Animator>();
 
-            if (platformCollider == null) Debug.LogError("DisappearingPlatform needs a Collider2D!", this);
-            if (platformRenderer == null) Debug.LogError("DisappearingPlatform needs a SpriteRenderer!", this);
-            if (platformAnimator == null) Debug.LogError("DisappearingPlatform needs an Animator!", this);
+            if (platformCollider == null) APADebug.LogError("DisappearingPlatform needs a Collider2D!");
+            if (platformRenderer == null) APADebug.LogError("DisappearingPlatform needs a SpriteRenderer!");
+            if (platformAnimator == null) APADebug.LogError("DisappearingPlatform needs an Animator!");
 
             initialPosition = transform.position;
             initialRotation = transform.rotation;
 
             if (activationMode == ActivationMode.OnSignal && string.IsNullOrEmpty(platformID))
             {
-                Debug.LogWarning(
-                    $"DisappearingPlatform '{gameObject.name}' is set to OnSignal mode but has no Platform ID assigned!",
-                    this);
+                APADebug.LogWarning(
+                    $"DisappearingPlatform '{gameObject.name}' is set to OnSignal mode but has no Platform ID assigned!");
             }
         }
 
@@ -117,7 +116,7 @@ namespace _APA.Scripts
                 return;
             }
 
-            Debug.Log(
+            APADebug.Log(
                 $"DisappearingPlatform '{gameObject.name}' received signal for ID '{receivedID}'. Starting disappear sequence (OnSignal).");
             StartDisappearSequence(delayOnSignal);
         }

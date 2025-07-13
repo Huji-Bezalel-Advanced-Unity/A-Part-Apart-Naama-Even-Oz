@@ -129,11 +129,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boundaryPointIndex: 3
-  unlockSignalID: 
+  unlockSignalID: 4
   requiredUnlockSignals: 1
   sceneToLoadOnUnlock: 
   player1Transform: {fileID: 0}
   player2Transform: {fileID: 0}
+  blockingCollider: {fileID: 8683391296484470373}
 --- !u!1 &3925371790739187095
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,8 +292,8 @@ MonoBehaviour:
   smoothTime: 0.3
   sectionBoundaryPoints:
   - {fileID: 2851875537698247479}
-  - {fileID: 1142762818456864861}
   - {fileID: 1747925007312592988}
+  - {fileID: 1142762818456864861}
   - {fileID: 8710627926518732051}
   - {fileID: 1436091654070312227}
   - {fileID: 1100603566718940115}
@@ -396,6 +397,7 @@ MonoBehaviour:
   sceneToLoadOnUnlock: 
   player1Transform: {fileID: 0}
   player2Transform: {fileID: 0}
+  blockingCollider: {fileID: 5457071193115812113}
 --- !u!1 &4894222442321174208
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,6 +495,7 @@ MonoBehaviour:
   sceneToLoadOnUnlock: Final
   player1Transform: {fileID: 0}
   player2Transform: {fileID: 0}
+  blockingCollider: {fileID: 3934393171358370510}
 --- !u!1 &5662586396755695979
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,6 +593,7 @@ MonoBehaviour:
   sceneToLoadOnUnlock: 
   player1Transform: {fileID: 0}
   player2Transform: {fileID: 0}
+  blockingCollider: {fileID: 54177044430796636}
 --- !u!1 &5890786240381731789
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,6 +691,7 @@ MonoBehaviour:
   sceneToLoadOnUnlock: 
   player1Transform: {fileID: 0}
   player2Transform: {fileID: 0}
+  blockingCollider: {fileID: 138806907401477779}
 --- !u!1 &6848540516257423518
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,6 +789,7 @@ MonoBehaviour:
   sceneToLoadOnUnlock: 
   player1Transform: {fileID: 0}
   player2Transform: {fileID: 0}
+  blockingCollider: {fileID: 4975073765822135060}
 --- !u!1 &8581630240260144653
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,4 +836,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53e6f9cb9324bde488a1884a69a72441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainCameraController: {fileID: 5556709494081448016}
+  apaMainCameraController: {fileID: 5556709494081448016}

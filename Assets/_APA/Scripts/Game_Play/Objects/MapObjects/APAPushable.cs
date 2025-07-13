@@ -4,7 +4,7 @@ namespace _APA.Scripts
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Collider2D))]
-    public class Pushable : APAMonoBehaviour
+    public class APAPushable : APAMonoBehaviour
     {
         [SerializeField] private float pushResistance = 1.0f;
         [SerializeField] private bool requiresSpecificPlayerPower = false;
@@ -17,7 +17,7 @@ namespace _APA.Scripts
             Rb = GetComponent<Rigidbody2D>();
             if (Rb.bodyType != RigidbodyType2D.Dynamic)
             {
-                Debug.LogWarning($"Pushable object '{gameObject.name}' had its Rigidbody2D set to Dynamic.", this);
+                APADebug.LogWarning($"Pushable object '{gameObject.name}' had its Rigidbody2D set to Dynamic.");
                 Rb.bodyType = RigidbodyType2D.Dynamic;
             }
 
@@ -28,12 +28,12 @@ namespace _APA.Scripts
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                if (SoundManager.Instance != null)
+                if (APASoundManager.Instance != null)
                 {
                     if (pushSound != null)
-                        SoundManager.Instance.PlaySFX(pushSound);
+                        APASoundManager.Instance.PlaySFX(pushSound);
                     else
-                        SoundManager.Instance.PlayPushSound();
+                        APASoundManager.Instance.PlayPushSound();
                 }
             }
         }

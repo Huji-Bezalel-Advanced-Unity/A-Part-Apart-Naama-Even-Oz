@@ -8,7 +8,7 @@ namespace _APA.Scripts
 
     [RequireComponent(typeof(Collider2D))]
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PressurePlate : APAMonoBehaviour
+    public class APAPressurePlate : APAMonoBehaviour
     {
         [Header("Event Manager Settings")]
         [Tooltip("The unique ID of the object(s) this plate activates/deactivates via EventManager.")]
@@ -41,7 +41,7 @@ namespace _APA.Scripts
 
             if (string.IsNullOrEmpty(targetObjectID))
             {
-                Debug.LogWarning($"PressurePlate '{gameObject.name}' has no Target Object ID.", this);
+                APADebug.LogWarning($"PressurePlate '{gameObject.name}' has no Target Object ID.");
             }
         }
 
@@ -77,9 +77,9 @@ namespace _APA.Scripts
             OnPressedFeedback?.Invoke();
 
             if (clickSound != null)
-                SoundManager.Instance?.PlaySFX(clickSound);
+                APASoundManager.Instance?.PlaySFX(clickSound);
             else
-                SoundManager.Instance?.PlayClickSound();
+                APASoundManager.Instance?.PlayClickSound();
         }
 
         private void DeactivatePlate()

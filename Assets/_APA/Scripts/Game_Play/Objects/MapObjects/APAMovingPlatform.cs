@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace _APA.Scripts
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class MovingPlatform : APAMonoBehaviour
+    public class APAMovingPlatform : APAMonoBehaviour
     {
         public enum PlatformActivationMode { SingleTrip, StartContinuousLoop }
 
@@ -121,7 +121,7 @@ namespace _APA.Scripts
             bool alreadyMet = activeSources.Count >= requiredActivations;
             if (id == "0")
             {
-                Debug.Log(alreadyMet);
+                APADebug.Log(alreadyMet);
             }
             activeSources.Add(source);
             if (activeSources.Count >= requiredActivations && !alreadyMet)
@@ -157,7 +157,7 @@ namespace _APA.Scripts
             isLooping = loop;
             movingToEnd = target == endPoint;
             isPaused = false;
-            SoundManager.Instance?.PlaySFX(movementSound );
+            APASoundManager.Instance?.PlaySFX(movementSound );
         }
 
         private void StopMovement()

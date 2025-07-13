@@ -51,22 +51,16 @@ namespace _APA.Scripts
         None,
         OnObjectActivate,
         OnObjectDeactivate,
-        OnLoadSceneRequested,
         OnDarkPlayerStuckInLight,
-        OnDarkPlayerStuckInLightCamera,
         OnBarrierOpened,
         OnPlayersPassedBarrier,
         OnShowStuckDecisionUI,
-        OnVideoEnded,
-        OnVideoSkipped,
-        OnVideoError,
         TriggerObjectActivate,
         TriggerObjectDeactivate,
         TriggerBarrierOpened,
         TriggerLoadScene,
-        OnReleasedFeedback,
-        OnPressedFeedback,
         OnPlayerCanMove,
+        
 
 
 

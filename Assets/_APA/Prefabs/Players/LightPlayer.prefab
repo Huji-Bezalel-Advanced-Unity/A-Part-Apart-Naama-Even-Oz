@@ -111,7 +111,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 100
+  m_SortingOrder: 101
   m_Sprite: {fileID: -1901912019122261970, guid: 9e8cea7672f38a64c869a87b815487fb, type: 3}
   m_Color: {r: 0.94716984, g: 0.94716984, b: 0.94716984, a: 1}
   m_FlipX: 0
@@ -226,9 +226,10 @@ MonoBehaviour:
   jumpKey: 273
   acceleration: 50
   maxSpeed: 15
-  jumpForce: 30
+  jumpForce: 20
   groundCheck: {fileID: 7386253616998783036}
   groundCheckRadius: 0.25
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  playerId: Light

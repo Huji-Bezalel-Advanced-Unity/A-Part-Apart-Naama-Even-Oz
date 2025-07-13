@@ -1,16 +1,17 @@
 using System.Collections;
 using APA.Core;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _APA.Scripts
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Collider2D))]
     [RequireComponent(typeof(Animator))]
-    public class LightInteractionController : APAMonoBehaviour
+    public class APALightInteractionController : APAMonoBehaviour
     {
-        [Header("Light Interaction Settings")] [SerializeField]
-        private DarkPlayerMovement darkPlayerMovement;
+        [FormerlySerializedAs("apaDarkPlayerMovement")] [FormerlySerializedAs("darkPlayerMovement")] [Header("Light Interaction Settings")] [SerializeField]
+        private ApaDarkApaPlayerMovement apaDarkApaPlayerMovement;
 
         [Header("References")] [SerializeField]
         private Transform[] lightCheckPoints;
@@ -22,6 +23,8 @@ namespace _APA.Scripts
         [SerializeField] private Animator animator;
         [SerializeField] private AudioClip hurtSound;
         bool initialized;
+        private float lastHurtSoundTime = -Mathf.Infinity;
+        private const float hurtSoundCooldown = 10f;
 
         private void Awake()
         {
@@ -40,7 +43,7 @@ namespace _APA.Scripts
                 var pointsGO = GameObject.FindGameObjectsWithTag("Light");
                 if(pointsGO.Length == 0)
                 {
-                    Debug.LogWarning("No light points found at Start.");
+                    APADebug.LogWarning("No light points found at Start.");
                 }
                 lightCheckPoints = new Transform[pointsGO.Length];
                 for (int i = 0; i < pointsGO.Length; i++)
@@ -78,14 +81,18 @@ namespace _APA.Scripts
                         if (hit.collider != null && hit.collider.tag == "Light")
                         {
                             animator.SetTrigger("Hurt");
-                            SoundManager.Instance?.PlaySFX(hurtSound );
+                            if (Time.time - lastHurtSoundTime >= hurtSoundCooldown)
+                            {
+                                APASoundManager.Instance?.PlaySFX(hurtSound);
+                                lastHurtSoundTime = Time.time;
+                            }
                             var pushDirection = Vector2.right * -Mathf.Sign(checkPoint.position.x - rb.position.x);
-                            yield return darkPlayerMovement.LightPushDirectionCoroutine(pushDirection);
+                            yield return apaDarkApaPlayerMovement.LightPushDirectionCoroutine(pushDirection);
 
                             break;
                         }
                     }
-                }
+                }   
 
                 yield return waitForFixedUpdate;
             }

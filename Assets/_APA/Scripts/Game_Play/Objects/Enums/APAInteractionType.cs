@@ -1,11 +1,7 @@
-// InteractionType.cs
 public enum InteractionType
 {
-    None,   // Default/no interaction
-    Rope,
-    Ladder,
+    None, 
     Button,
-    Trajectory,
-    Lever
+  
     
 }
